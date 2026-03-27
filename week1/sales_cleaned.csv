@@ -1,0 +1,49 @@
+OrderID,OrderDate,CustomerID,CustomerName,Region,Product,Category,Quantity,UnitPrice,SalesRep,SalesAmount
+1001,2026-03-01,C001,John Smith,West,Laptop,Hardware,2,850.0,Alice,1700.0
+1002,2026-03-01,C002,Maria Lopez,East,Mouse,Accessories,5,25.0,Bob,125.0
+1003,2026-03-02,C003,David Lee,South,Keyboard,Accessories,3,45.0,Carol,135.0
+1004,2026-03-02,C004,Sarah Khan,North,Monitor,Hardware,2,220.0,Alice,440.0
+1005,2026-03-03,C005,Chris Evans,West,Printer,Office Supplies,1,180.0,Bob,180.0
+1006,2026-03-03,C006,Nina Patel,East,Laptop,Hardware,1,900.0,Carol,900.0
+1007,2026-03-04,C007,Mark Taylor,South,Desk Chair,Furniture,2,150.0,Alice,300.0
+1008,2026-03-04,C008,Emma Stone,North,Notebook,Office Supplies,10,6.0,Bob,60.0
+1009,2026-03-05,C009,Oliver King,West,Pen Set,Office Supplies,12,4.0,Carol,48.0
+1010,2026-03-05,C010,Ava Brown,East,Monitor,Hardware,1,210.0,Alice,210.0
+1011,2026-03-06,C011,Liam Scott,South,Mouse,Accessories,4,20.0,Bob,80.0
+1012,2026-03-06,C012,Sophia Hall,North,Laptop,Hardware,2,870.0,Carol,1740.0
+1013,2026-03-07,C013,Noah Green,West,Keyboard,Accessories,2,50.0,Alice,100.0
+1014,2026-03-07,C014,Mia Adams,East,Printer,Office Supplies,1,175.0,Bob,175.0
+1015,2026-03-08,C015,James White,South,Desk Chair,Furniture,1,145.0,Carol,145.0
+1016,2026-03-08,C016,Isabella Young,North,Notebook,Office Supplies,15,5.0,Alice,75.0
+1017,2026-03-09,C017,Ben Carter,West,Monitor,Hardware,2,230.0,Bob,460.0
+1018,2026-03-09,C018,Charlotte Perez,East,Mouse,Accessories,6,24.0,Carol,144.0
+1019,2026-03-10,C019,Henry Walker,South,Laptop,Hardware,1,910.0,Alice,910.0
+1020,2026-03-10,C020,Amelia Rivera,North,Pen Set,Office Supplies,8,5.0,Bob,40.0
+1021,2026-03-11,C021,Lucas Torres,West,Keyboard,Accessories,4,48.0,Carol,192.0
+1022,2026-03-11,C022,Harper Flores,East,Desk Chair,Furniture,2,160.0,Alice,320.0
+1023,2026-03-12,C023,Ethan Diaz,South,Monitor,Hardware,1,225.0,Bob,225.0
+1024,2026-03-12,C024,Evelyn Reed,North,Printer,Office Supplies,1,185.0,Carol,185.0
+1025,2026-03-13,C025,Daniel Cox,West,Notebook,Office Supplies,20,5.0,Alice,100.0
+1026,2026-03-13,C026,Abigail Ward,East,Laptop,Hardware,2,880.0,Bob,1760.0
+1027,2026-03-14,C027,Matthew Gray,South,Mouse,Accessories,3,22.0,Carol,66.0
+1028,2026-03-14,C028,Ella Brooks,North,Keyboard,Accessories,2,47.0,Alice,94.0
+1029,2026-03-15,C029,Joseph Price,West,Desk Chair,Furniture,1,155.0,Bob,155.0
+1030,2026-03-15,C030,Grace Bennett,East,Pen Set,Office Supplies,10,4.0,Carol,40.0
+1032,2026-03-16,C032,Lily Moore,East,Mouse,Accessories,5,23.0,Bob,115.0
+1033,2026-03-16,C033,David Lee,South,Keyboard,Accessories,2,45.0,Carol,90.0
+1034,2026-03-17,C034,Unknown,North,Monitor,Hardware,2,215.0,Alice,430.0
+1035,2026-03-17,C035,Chris Evans,West,Printer,Office Supplies,1,47.5,Bob,47.5
+1036,2026-03-18,C036,Nina Patel,East,Laptop,Hardware,1,920.0,Carol,920.0
+1037,2026-03-18,C037,Mark Taylor,South,Desk Chair,Furniture,2,150.0,Alice,300.0
+1038,2026-03-19,C038,Emma Stone,North,Notebook,Office Supplies,12,6.0,Bob,72.0
+1040,2026-03-20,C040,Ava Brown,East,Monitor,Hardware,1,205.0,Alice,205.0
+1041,2026-03-20,C041,Liam Scott,South,Mouse,Accessories,4,21.0,Bob,84.0
+1042,2026-03-21,C042,Sophia Hall,North,Laptop,Hardware,2,875.0,Carol,1750.0
+1043,2026-03-21,C043,Noah Green,West,Keyboard,Accessories,2,49.0,Alice,98.0
+1044,2026-03-22,C044,Mia Adams,East,Printer,Office Supplies,1,178.0,Bob,178.0
+1045,2026-03-22,C045,James White,South,Desk Chair,Furniture,1,148.0,Carol,148.0
+1046,2026-03-23,C046,Isabella Young,North,Notebook,Office Supplies,15,5.0,Alice,75.0
+1047,2026-03-23,C047,Ben Carter,West,Monitor,Hardware,2,235.0,Bob,470.0
+1048,2026-03-24,C048,Charlotte Perez,East,Mouse,Accessories,6,24.0,Carol,144.0
+1049,2026-03-24,C049,Henry Walker,South,Laptop,Hardware,1,905.0,Alice,905.0
+1050,2026-03-25,C050,Amelia Rivera,North,Pen Set,Office Supplies,8,5.0,Bob,40.0
