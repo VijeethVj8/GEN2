@@ -1,0 +1,47 @@
+
+FINAL ANALYSIS REPORT
+=====================
+
+Project Title:
+Advanced Retail Sales Analytics with Forecasting
+
+1. Dataset Overview
+- Custom synthetic dataset created for a retail business
+- Records: 13,152
+- Date range: 2023-01-01 to 2025-12-31
+- Dimensions included: date, region, category, marketing spend, discount, units sold, revenue, cost, profit, customer satisfaction
+
+2. Business KPIs
+- Total Revenue: $797,059,455.76
+- Total Profit: $266,785,307.32
+- Total Units Sold: 2,787,167
+- Average Customer Satisfaction: 4.20/5
+- Overall Profit Margin: 33.47%
+
+3. Key Insights
+- Highest revenue generating category: Electronics
+- Highest profit generating region: West
+- Best month by revenue: December 2025
+- Revenue shows a clear seasonal increase during Q4 and year-end months
+- Marketing spend and units sold are strongly related to revenue growth
+- Discount strategies improve demand but should be balanced with profit margin
+
+4. Predictive Analysis
+- Model Used: RandomForestRegressor
+- MAE: 1,140,163.64
+- RMSE: 1,241,904.97
+- R² Score: 0.5648
+- Average forecasted monthly revenue for next 6 months: $22,206,835.57
+
+5. Recommendations
+- Increase marketing investment during high-conversion months
+- Focus growth strategies on Electronics category
+- Replicate best-performing sales practices from West region
+- Use forecast values for budget planning and inventory management
+- Improve dashboard adoption for decision-making during monthly reviews
+
+6. Final Deliverables Generated
+- Analysis report
+- Interactive dashboard HTML file
+- Forecast CSV
+- Presentation PPTX
