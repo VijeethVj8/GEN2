@@ -1,0 +1,231 @@
+# Week 9 Excel Automation Script - Gen2soft
+# Creates: Excel dashboard/report, KPI tracker, formulas documentation
+# Install: pip install pandas xlsxwriter
+
+import pandas as pd
+import xlsxwriter
+from datetime import datetime
+
+output_file = "Gen2soft_Week9_Automated_Report.xlsx"
+
+# -----------------------------
+# Sample source data
+# -----------------------------
+sales_data = pd.DataFrame({
+    "Order ID": [1001, 1002, 1003, 1004, 1005, 1006],
+    "Date": pd.date_range("2026-05-01", periods=6),
+    "Region": ["North", "South", "East", "West", "North", "East"],
+    "Product ID": ["P001", "P002", "P003", "P001", "P002", "P003"],
+    "Sales Rep": ["Alice", "Brian", "Cynthia", "David", "Alice", "Cynthia"],
+    "Units Sold": [25, 18, 40, 30, 22, 45],
+    "Unit Price": [120, 150, 90, 120, 150, 90],
+    "Status": ["Completed", "Pending", "Completed", "Completed", "Pending", "Completed"]
+})
+
+product_data = pd.DataFrame({
+    "Product ID": ["P001", "P002", "P003"],
+    "Product Name": ["Laptop Stand", "Wireless Mouse", "Keyboard"],
+    "Category": ["Accessories", "Accessories", "Hardware"],
+    "Target Sales": [3000, 3500, 4000]
+})
+
+kpi_data = pd.DataFrame({
+    "KPI": ["Total Sales", "Completed Orders", "Pending Orders", "Average Order Value"],
+    "Target": [18000, 4, 2, 2500]
+})
+
+# -----------------------------
+# Create workbook
+# -----------------------------
+with pd.ExcelWriter(output_file, engine="xlsxwriter") as writer:
+    sales_data.to_excel(writer, sheet_name="Raw Data", index=False)
+    product_data.to_excel(writer, sheet_name="Lookup Table", index=False)
+    kpi_data.to_excel(writer, sheet_name="KPI Tracker", index=False)
+
+    workbook = writer.book
+
+    # Formats
+    title_fmt = workbook.add_format({
+        "bold": True, "font_size": 16, "bg_color": "#1F4E78",
+        "font_color": "white", "align": "center"
+    })
+    header_fmt = workbook.add_format({
+        "bold": True, "bg_color": "#D9EAF7", "border": 1
+    })
+    money_fmt = workbook.add_format({"num_format": "$#,##0", "border": 1})
+    percent_fmt = workbook.add_format({"num_format": "0.0%", "border": 1})
+    normal_fmt = workbook.add_format({"border": 1})
+    good_fmt = workbook.add_format({"bg_color": "#C6EFCE", "font_color": "#006100"})
+    bad_fmt = workbook.add_format({"bg_color": "#FFC7CE", "font_color": "#9C0006"})
+
+    # -----------------------------
+    # Raw Data formulas
+    # -----------------------------
+    raw = writer.sheets["Raw Data"]
+    raw.write(0, 8, "Total Sales", header_fmt)
+    raw.write(0, 9, "Product Name - XLOOKUP", header_fmt)
+    raw.write(0, 10, "Category - INDEX MATCH", header_fmt)
+
+    for row in range(2, len(sales_data) + 2):
+        raw.write_formula(row - 1, 8, f"=F{row}*G{row}", money_fmt)
+        raw.write_formula(row - 1, 9, f'=XLOOKUP(D{row},\'Lookup Table\'!A:A,\'Lookup Table\'!B:B,"Not Found")', normal_fmt)
+        raw.write_formula(row - 1, 10, f'=INDEX(\'Lookup Table\'!C:C,MATCH(D{row},\'Lookup Table\'!A:A,0))', normal_fmt)
+
+    raw.autofilter(0, 0, len(sales_data), 10)
+    raw.set_column("A:A", 10)
+    raw.set_column("B:B", 12)
+    raw.set_column("C:E", 14)
+    raw.set_column("F:H", 12)
+    raw.set_column("I:I", 14)
+    raw.set_column("J:K", 24)
+
+    raw.data_validation("H2:H100", {
+        "validate": "list",
+        "source": ["Completed", "Pending", "Cancelled"]
+    })
+
+    raw.conditional_format("I2:I100", {
+        "type": "cell",
+        "criteria": ">=",
+        "value": 3000,
+        "format": good_fmt
+    })
+
+    raw.conditional_format("I2:I100", {
+        "type": "cell",
+        "criteria": "<",
+        "value": 3000,
+        "format": bad_fmt
+    })
+
+    # -----------------------------
+    # KPI Tracker
+    # -----------------------------
+    kpi = writer.sheets["KPI Tracker"]
+    kpi.write(0, 2, "Actual", header_fmt)
+    kpi.write(0, 3, "Variance", header_fmt)
+    kpi.write(0, 4, "Performance %", header_fmt)
+    kpi.write(0, 5, "Status", header_fmt)
+
+    formulas = [
+        "=SUM('Raw Data'!I:I)",
+        '=COUNTIF(\'Raw Data\'!H:H,"Completed")',
+        '=COUNTIF(\'Raw Data\'!H:H,"Pending")',
+        '=AVERAGE(\'Raw Data\'!I:I)'
+    ]
+
+    for i, formula in enumerate(formulas, start=2):
+        kpi.write_formula(f"C{i}", formula, money_fmt if i in [2, 5] else normal_fmt)
+        kpi.write_formula(f"D{i}", f"=C{i}-B{i}", money_fmt if i in [2, 5] else normal_fmt)
+        kpi.write_formula(f"E{i}", f"=C{i}/B{i}", percent_fmt)
+        kpi.write_formula(f"F{i}", f'=IF(E{i}>=1,"Met","Below Target")', normal_fmt)
+
+    kpi.set_column("A:A", 24)
+    kpi.set_column("B:F", 18)
+
+    kpi.conditional_format("F2:F5", {
+        "type": "text",
+        "criteria": "containing",
+        "value": "Met",
+        "format": good_fmt
+    })
+
+    kpi.conditional_format("F2:F5", {
+        "type": "text",
+        "criteria": "containing",
+        "value": "Below Target",
+        "format": bad_fmt
+    })
+
+    # -----------------------------
+    # Pivot-style summary
+    # -----------------------------
+    pivot = workbook.add_worksheet("Pivot Summary")
+
+    region_summary = sales_data.copy()
+    region_summary["Total Sales"] = region_summary["Units Sold"] * region_summary["Unit Price"]
+    region_summary = region_summary.groupby("Region", as_index=False)["Total Sales"].sum()
+
+    pivot.write("A1", "Sales by Region", title_fmt)
+    pivot.write_row("A3", ["Region", "Total Sales"], header_fmt)
+
+    for idx, row in region_summary.iterrows():
+        pivot.write(idx + 3, 0, row["Region"], normal_fmt)
+        pivot.write(idx + 3, 1, row["Total Sales"], money_fmt)
+
+    chart = workbook.add_chart({"type": "column"})
+    chart.add_series({
+        "name": "Total Sales",
+        "categories": ["Pivot Summary", 3, 0, len(region_summary) + 2, 0],
+        "values": ["Pivot Summary", 3, 1, len(region_summary) + 2, 1]
+    })
+    chart.set_title({"name": "Sales by Region"})
+    chart.set_x_axis({"name": "Region"})
+    chart.set_y_axis({"name": "Sales"})
+    pivot.insert_chart("D3", chart)
+
+    pivot.set_column("A:B", 18)
+    pivot.set_column("D:J", 16)
+
+    # -----------------------------
+    # Dashboard
+    # -----------------------------
+    dashboard = workbook.add_worksheet("Dashboard")
+
+    dashboard.merge_range("A1:H1", "Gen2soft Week 9 Automated Excel Dashboard", title_fmt)
+
+    dashboard.write("A3", "Total Sales", header_fmt)
+    dashboard.write_formula("B3", "=SUM('Raw Data'!I:I)", money_fmt)
+
+    dashboard.write("A4", "Completed Orders", header_fmt)
+    dashboard.write_formula("B4", '=COUNTIF(\'Raw Data\'!H:H,"Completed")', normal_fmt)
+
+    dashboard.write("A5", "Pending Orders", header_fmt)
+    dashboard.write_formula("B5", '=COUNTIF(\'Raw Data\'!H:H,"Pending")', normal_fmt)
+
+    dashboard.write("A6", "Average Order Value", header_fmt)
+    dashboard.write_formula("B6", "=AVERAGE('Raw Data'!I:I)", money_fmt)
+
+    dashboard.write("A8", "Formula Used", header_fmt)
+    dashboard.write("B8", "Purpose", header_fmt)
+
+    dashboard.write("A9", "XLOOKUP", normal_fmt)
+    dashboard.write("B9", "Fetches Product Name from Lookup Table", normal_fmt)
+
+    dashboard.write("A10", "INDEX-MATCH", normal_fmt)
+    dashboard.write("B10", "Fetches Product Category dynamically", normal_fmt)
+
+    dashboard.write("A11", "SUM / COUNTIF / AVERAGE", normal_fmt)
+    dashboard.write("B11", "Builds KPI tracker and dashboard metrics", normal_fmt)
+
+    dashboard.set_column("A:A", 24)
+    dashboard.set_column("B:H", 28)
+
+    # -----------------------------
+    # Documentation
+    # -----------------------------
+    docs = workbook.add_worksheet("Documentation")
+
+    docs.merge_range("A1:D1", "Formula and Logic Documentation", title_fmt)
+
+    docs.write_row("A3", ["Feature", "Formula / Method", "Purpose", "Sheet"], header_fmt)
+
+    documentation = [
+        ["XLOOKUP", "=XLOOKUP(Product ID, Lookup Range, Return Range)", "Retrieves product names", "Raw Data"],
+        ["INDEX-MATCH", "=INDEX(Return Range, MATCH(Lookup Value, Lookup Range, 0))", "Retrieves categories", "Raw Data"],
+        ["Calculated Field", "=Units Sold * Unit Price", "Calculates total sales", "Raw Data"],
+        ["COUNTIF", '=COUNTIF(Status Range,"Completed")', "Counts order statuses", "KPI Tracker"],
+        ["Pivot Summary", "Group by Region", "Summarizes total sales by region", "Pivot Summary"],
+        ["Conditional Formatting", "Sales threshold and KPI status", "Highlights performance", "Raw Data / KPI Tracker"],
+        ["Data Validation", "Dropdown list", "Controls status input accuracy", "Raw Data"]
+    ]
+
+    for r, item in enumerate(documentation, start=4):
+        docs.write_row(r - 1, 0, item, normal_fmt)
+
+    docs.set_column("A:A", 24)
+    docs.set_column("B:B", 45)
+    docs.set_column("C:C", 38)
+    docs.set_column("D:D", 22)
+
+print(f"Excel report created successfully: {output_file}")
