@@ -1,0 +1,5 @@
+Optimization Area,Action Taken,Benefit
+Categorical Data Types,Converted text columns to category type,Reduced memory usage
+Aggregated Reporting Table,Created monthly summary table,Faster visual rendering
+Reduced Row-Level Dashboard Load,Used aggregated data for dashboard visuals,Improved dashboard speed
+Pre-calculated Measures,"Created Sales, Profit, and Profit Margin columns",Reduced repeated calculations

@@ -1,0 +1,28 @@
+
+# Executive Summary Presentation
+
+## Business Overview
+This dashboard analyzes enterprise sales performance across regions, categories, customer segments, and products.
+
+## Key Performance Indicators
+- Total Sales: $21,956,255.06
+- Total Profit: $8,809,577.90
+- Total Orders: 5,000
+- Average Profit Margin: 40.14%
+
+## Main Insights
+- Best performing region by sales: South
+- Most profitable category: Technology
+- Highest selling product: Paper
+
+## Dashboard Features
+- Dynamic filters by Region, Category, and Segment
+- Drill-through report by Region
+- Calculated measures including Sales, Profit, and Profit Margin
+- Optimized reporting table for faster dashboard performance
+
+## Recommendations
+- Focus marketing campaigns on high-profit categories
+- Improve sales strategy in low-performing regions
+- Use drill-through reports for detailed product-level decisions
+- Continue using aggregated tables for executive dashboards
