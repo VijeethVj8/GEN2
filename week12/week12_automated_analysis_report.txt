@@ -1,0 +1,37 @@
+
+WEEK 12 AUTOMATED DATA ANALYSIS REPORT
+
+Objective:
+The objective of this analysis is to use Python libraries such as Pandas,
+NumPy, and Matplotlib to clean, preprocess, analyze, visualize, and report
+business data efficiently.
+
+Dataset Overview:
+- Original records including duplicates: 1010
+- Cleaned records after preprocessing: 1000
+- Total unique customers: 198
+- Total orders: 1000
+
+Key Business Metrics:
+- Total Revenue: 12274379.20
+- Average Order Value: 12274.38
+- Total Quantity Sold: 5005
+
+Insights:
+1. Product category sales show which categories contribute most to revenue.
+2. Regional sales analysis helps identify strong and weak markets.
+3. Monthly sales trends support demand forecasting.
+4. Discount analysis helps understand pricing and promotion patterns.
+
+Automation Benefits:
+- Data cleaning is handled through reusable functions.
+- Summary metrics are generated automatically.
+- Charts are produced with minimal manual effort.
+- Reports are exported automatically for business review.
+
+Recommendations:
+1. Focus marketing efforts on high-performing product categories.
+2. Improve sales strategies in low-performing regions.
+3. Monitor monthly sales trends for inventory planning.
+4. Review discount strategies to protect profit margins.
+5. Reuse this automated workflow for future datasets.
