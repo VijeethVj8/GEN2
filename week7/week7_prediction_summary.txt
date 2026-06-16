@@ -1,0 +1,39 @@
+
+WEEK 7 PREDICTIVE ANALYTICS SUMMARY
+
+Objective:
+The objective of this task is to understand basic predictive analytics
+by building a simple sales forecasting model using Python.
+
+Model Used:
+Linear Regression
+
+Features Used:
+- Month
+- Advertising Spend
+- Discount Percentage
+- Website Visitors
+
+Target Variable:
+- Sales
+
+Model Performance:
+- Mean Absolute Error: 5947.69
+- R2 Score: 0.72
+
+Interpretation:
+The model predicts sales based on advertising spend, discount percentage,
+website visitors, and month. A lower Mean Absolute Error indicates better
+prediction accuracy. The R2 score explains how well the input variables
+describe changes in sales.
+
+Business Insights:
+1. Higher advertising spend usually increases sales.
+2. More website visitors are linked with higher sales.
+3. Discounts can improve sales performance.
+4. Forecasted sales help management plan inventory and marketing budgets.
+
+Conclusion:
+This model provides a basic but useful sales forecasting approach.
+It can be improved further by adding more historical data, seasonal factors,
+customer behavior, and external market conditions.
