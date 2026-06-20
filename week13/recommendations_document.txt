@@ -1,0 +1,24 @@
+
+MARKETING ANALYSIS REPORT
+
+Key Metrics:
+- Customer Retention Rate: 70.40%
+- Overall Conversion Rate: 13.46%
+- Overall Campaign ROI: 189.46%
+
+Customer Insights:
+- Largest customer segment: Low Value
+- High-value customers generate higher average spend and should be prioritized.
+- Customers with low purchase frequency may need re-engagement campaigns.
+
+Marketing Insights:
+- Best performing marketing channel by ROI: Email
+- Lowest performing marketing channel by ROI: Social Media
+
+Actionable Recommendations:
+1. Increase marketing budget for Email because it produces the highest ROI.
+2. Improve or reduce spending on Social Media campaigns.
+3. Create loyalty programs for High Value customers to improve retention.
+4. Send personalized offers to Medium Value customers to move them into High Value.
+5. Run win-back campaigns for customers with high Last_Purchase_Days.
+6. Track conversion rate and ROI monthly for better campaign optimization.
